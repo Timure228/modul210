@@ -1,0 +1,221 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: '11'
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{"resourceVersion":"7051296722"},"generation":15,"labels":{"app":"wordpress-db","app.kubernetes.io/part-of":"wordpress-label-group"},"name":"wordpress-db","namespace":"264439-tarduch","resourceVersion":"7051374283","uid":"7d574eb6-dad1-4eed-9c23-1211a5a8473a"},"spec":{"progressDeadlineSeconds":600,"replicas":1,"revisionHistoryLimit":10,"selector":{"matchLabels":{"app":"wordpress-db"}},"strategy":{"rollingUpdate":{"maxSurge":"25%","maxUnavailable":"25%"},"type":"RollingUpdate"},"template":{"metadata":{"creationTimestamp":null,"labels":{"app":"wordpress-db"}},"spec":{"containers":[{"env":[{"name":"MARIADB_ROOT_PASSWORD","value":"MTIzMTIz"},{"name":"MARIADB_ROOT_USER","value":"YWRtaW4"},{"name":"MARIADB_DATABASE","value":"ZGF0YWJhc2U"},{"name":"MARIADB_USER","value":"test"},{"name":"MARIADB_PASSWORD","value":"test"},{"name":"MARIADB_MASTER_HOST","value":"wordpress-db"}],"image":"bitnami/mariadb:latest","imagePullPolicy":"Always","name":"wordpress-db","ports":[{"containerPort":3306,"protocol":"TCP"}],"resources":{"limits":{"cpu":"2","memory":"200Mi"},"requests":{"cpu":"1","memory":"100Mi"}},"terminationMessagePath":"/dev/termination-log","terminationMessagePolicy":"File"}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{},"terminationGracePeriodSeconds":30}}},"status":{"availableReplicas":1,"observedGeneration":15,"readyReplicas":1,"replicas":1,"updatedReplicas":1}}
+    resourceVersion: '7051296722'
+  resourceVersion: '7051733054'
+  name: wordpress-db
+  uid: 7d574eb6-dad1-4eed-9c23-1211a5a8473a
+  creationTimestamp: '2026-06-10T14:00:33Z'
+  generation: 17
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: apps/v1
+      subresource: scale
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: apps/v1
+      time: '2026-06-11T08:03:43Z'
+    - manager: Mozilla
+      operation: Update
+      apiVersion: apps/v1
+      time: '2026-06-11T08:56:01Z'
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2026-06-11T08:56:57Z'
+      subresource: status
+  namespace: 264439-tarduch
+  labels:
+    app: wordpress-db
+    app.kubernetes.io/part-of: wordpress-label-group
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress-db
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: wordpress-db
+    spec:
+      containers:
+        - name: wordpress-db
+          image: 'bitnami/mariadb:latest'
+          ports:
+            - containerPort: 3306
+              protocol: TCP
+          env:
+            - name: MARIADB_MASTER_HOST
+              value: wordpress-db
+            - name: MARIADB_ROOT_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-db-secret
+                  key: MARIADB_ROOT_PASSWORD
+            - name: MARIADB_ROOT_USER
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-db-secret
+                  key: MARIADB_ROOT_USER
+            - name: MARIADB_DATABASE
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-db-secret
+                  key: MARIADB_DATABASE
+            - name: MARIADB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-db-secret
+                  key: MARIADB_USER
+            - name: MARIADB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-db-secret
+                  key: MARIADB_PASSWORD
+          resources:
+            limits:
+              cpu: '2'
+              memory: 200Mi
+            requests:
+              cpu: '1'
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+status:
+  observedGeneration: 17
+  replicas: 1
+  updatedReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1
+  conditions:
+    - type: Available
+      status: 'True'
+      lastUpdateTime: '2026-06-11T07:51:12Z'
+      lastTransitionTime: '2026-06-11T07:51:12Z'
+      reason: MinimumReplicasAvailable
+      message: Deployment has minimum availability.
+    - type: Progressing
+      status: 'True'
+      lastUpdateTime: '2026-06-11T08:56:57Z'
+      lastTransitionTime: '2026-06-11T07:45:12Z'
+      reason: NewReplicaSetAvailable
+      message: ReplicaSet "wordpress-db-84977c7f77" has successfully progressed.
+---
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  annotations:
+    deployment.kubernetes.io/revision: '23'
+    kubectl.kubernetes.io/last-applied-configuration: |
+      {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"wordpress","app.kubernetes.io/part-of":"wordpress-label-group"},"name":"wordpress","namespace":"264439-tarduch"},"spec":{"replicas":1,"selector":{"matchLabels":{"app":"wordpress"}},"template":{"metadata":{"labels":{"app":"wordpress"}},"spec":{"containers":[{"image":"bitnamicharts/wordpress","imagePullPolicy":"Always","name":"wordpress","ports":[{"containerPort":80,"protocol":"TCP"}],"resources":{"limits":{"cpu":"2","memory":"200Mi"},"requests":{"cpu":"1","memory":"100Mi"}}}],"dnsPolicy":"ClusterFirst","restartPolicy":"Always","schedulerName":"default-scheduler","securityContext":{}}}}}
+  resourceVersion: '7051966009'
+  name: wordpress
+  uid: b0ab8829-f08f-410c-9001-8d7d7554aa51
+  creationTimestamp: '2026-06-10T14:03:23Z'
+  generation: 42
+  managedFields:
+    - manager: kubectl-client-side-apply
+      operation: Update
+      apiVersion: apps/v1
+      time: '2026-06-11T08:27:57Z'
+    - manager: Mozilla
+      operation: Update
+      apiVersion: apps/v1
+      time: '2026-06-11T09:39:56Z'
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: apps/v1
+      time: '2026-06-11T09:40:00Z'
+      subresource: status
+  namespace: 264439-tarduch
+  labels:
+    app: wordpress
+    app.kubernetes.io/part-of: wordpress-label-group
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: wordpress
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: wordpress
+    spec:
+      containers:
+        - name: wordpress
+          image: bitnami/wordpress
+          ports:
+            - containerPort: 80
+              protocol: TCP
+          env:
+            - name: WORDPRESS_DATABASE_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-db-secret
+                  key: MARIADB_PASSWORD
+            - name: WORDPRESS_DATABASE_HOST
+              value: wordpress-db
+            - name: WORDPRESS_DATABASE_USER
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-db-secret
+                  key: MARIADB_USER
+            - name: WORDPRESS_DATABASE_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: wordpress-db-secret
+                  key: MARIADB_DATABASE
+            - name: WORDPRESS_HOSTNAME
+              value: route-wordpress-264439-tarduch.apps.exoscale-ch-gva-2-0.appuio.cloud
+            - name: WORDPRESS_PASSWORD
+              value: password
+            - name: WORDPRESS_USERNAME
+              value: noname
+          resources:
+            limits:
+              cpu: '2'
+              memory: 200Mi
+            requests:
+              cpu: '1'
+              memory: 100Mi
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+          imagePullPolicy: Always
+      restartPolicy: Always
+      terminationGracePeriodSeconds: 30
+      dnsPolicy: ClusterFirst
+      securityContext: {}
+      schedulerName: default-scheduler
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 25%
+      maxSurge: 25%
+  revisionHistoryLimit: 10
+  progressDeadlineSeconds: 600
+status:
+  observedGeneration: 42
+  replicas: 1
+  updatedReplicas: 1
+  readyReplicas: 1
+  availableReplicas: 1

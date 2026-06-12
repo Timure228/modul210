@@ -22,8 +22,32 @@ oc delete all --selector=app-...
 oc apply -f . (alles appleien in directory mit yaml files)
 
 
-Beispiel eines Dockerfile
+```
+# Basis-Image definieren (hier Node.js Version 18)
+FROM node:18
 
-Git workflow commandos
+# Arbeitsverzeichnis im Container festlegen
+WORKDIR /app
 
-Docker commandos die wir gelernt haben
+# Package-Dateien für Abhängigkeiten kopieren
+COPY package*.json ./
+
+# Abhängigkeiten während des Build-Prozesses installieren
+RUN npm install
+
+# Den restlichen Quellcode in den Container kopieren
+COPY . .
+
+# Port 3000 im Container dokumentieren/freigeben
+EXPOSE 3000
+
+# Standard-Startbefehl beim Ausführen des Containers festlegen
+CMD ["node", "server.js"]
+```
+
+
+Wenn hellblau in AppUiO schau events, pods -> Fehler kopieren und downscalen
+
+HPA for frontend
+
+base64 for terminal [Convert]::ToBase64String([System.Text.Encoding]::UTF8.GetBytes("your_text_here"))

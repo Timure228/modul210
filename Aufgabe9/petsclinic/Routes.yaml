@@ -1,0 +1,147 @@
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: spring-petclinic
+  namespace: 264439-tarduch
+  uid: d00e0cc4-ef7e-488a-8995-7402d0dc094b
+  resourceVersion: '7044587364'
+  creationTimestamp: '2026-06-10T09:06:58Z'
+  labels:
+    app: spring-petclinic
+    app.kubernetes.io/component: spring-petclinic
+    app.kubernetes.io/instance: spring-petclinic
+    app.kubernetes.io/name: spring-petclinic
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-17-ubi8
+  annotations:
+    app.openshift.io/vcs-ref: ''
+    app.openshift.io/vcs-uri: 'https://github.com/redhat-developer-demos/spring-petclinic'
+    openshift.io/generated-by: OpenShiftWebConsole
+    openshift.io/host.generated: 'true'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2026-06-10T09:06:58Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:app.openshift.io/vcs-ref': {}
+            'f:app.openshift.io/vcs-uri': {}
+            'f:openshift.io/generated-by': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:app.kubernetes.io/component': {}
+            'f:app.kubernetes.io/instance': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.openshift.io/runtime': {}
+            'f:app.openshift.io/runtime-version': {}
+        'f:spec':
+          'f:port':
+            .: {}
+            'f:targetPort': {}
+          'f:tls':
+            .: {}
+            'f:insecureEdgeTerminationPolicy': {}
+            'f:termination': {}
+          'f:to':
+            'f:kind': {}
+            'f:name': {}
+            'f:weight': {}
+          'f:wildcardPolicy': {}
+    - manager: openshift-router
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2026-06-10T09:06:58Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:ingress': {}
+      subresource: status
+spec:
+  host: spring-petclinic-264439-tarduch.apps.exoscale-ch-gva-2-0.appuio.cloud
+  to:
+    kind: Service
+    name: spring-petclinic
+    weight: 100
+  port:
+    targetPort: 8080-tcp
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: spring-petclinic-264439-tarduch.apps.exoscale-ch-gva-2-0.appuio.cloud
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2026-06-10T09:06:58Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.exoscale-ch-gva-2-0.appuio.cloud
+---
+kind: Route
+apiVersion: route.openshift.io/v1
+metadata:
+  name: route-php-my-admin
+  namespace: 264439-tarduch
+  uid: cecf602e-994c-4c93-8cfc-6be079e50499
+  resourceVersion: '7044874112'
+  creationTimestamp: '2026-06-10T11:25:26Z'
+  annotations:
+    openshift.io/host.generated: 'true'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2026-06-10T11:25:26Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:spec':
+          'f:port':
+            .: {}
+            'f:targetPort': {}
+          'f:tls':
+            .: {}
+            'f:insecureEdgeTerminationPolicy': {}
+            'f:termination': {}
+          'f:to':
+            'f:kind': {}
+            'f:name': {}
+            'f:weight': {}
+          'f:wildcardPolicy': {}
+    - manager: openshift-router
+      operation: Update
+      apiVersion: route.openshift.io/v1
+      time: '2026-06-10T11:25:26Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:status':
+          'f:ingress': {}
+      subresource: status
+spec:
+  host: route-php-my-admin-264439-tarduch.apps.exoscale-ch-gva-2-0.appuio.cloud
+  to:
+    kind: Service
+    name: php-my-admin
+    weight: 100
+  port:
+    targetPort: http
+  tls:
+    termination: edge
+    insecureEdgeTerminationPolicy: Redirect
+  wildcardPolicy: None
+status:
+  ingress:
+    - host: route-php-my-admin-264439-tarduch.apps.exoscale-ch-gva-2-0.appuio.cloud
+      routerName: default
+      conditions:
+        - type: Admitted
+          status: 'True'
+          lastTransitionTime: '2026-06-10T11:25:26Z'
+      wildcardPolicy: None
+      routerCanonicalHostname: router-default.apps.exoscale-ch-gva-2-0.appuio.cloud

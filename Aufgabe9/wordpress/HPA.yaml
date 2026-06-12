@@ -1,0 +1,31 @@
+kind: HorizontalPodAutoscaler
+apiVersion: autoscaling/v2
+metadata:
+  name: example
+  namespace: 264439-tarduch
+  uid: 475a449a-ea75-4ebd-b577-d4efe96d15db
+  resourceVersion: '7052054939'
+  creationTimestamp: '2026-06-11T09:56:27Z'
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: autoscaling/v2
+    - manager: kube-controller-manager
+      operation: Update
+      apiVersion: autoscaling/v2
+      subresource: status
+spec:
+  scaleTargetRef:
+    apiVersion: apps/v1
+    kind: Deployment
+    name: wordpress
+  minReplicas: 1
+  maxReplicas: 3
+  metrics:
+    - type: Resource
+      resource:
+        name: cpu
+        target:
+          type: Utilization
+          averageUtilization: 80
+          

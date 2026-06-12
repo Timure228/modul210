@@ -1,0 +1,31 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: petclinic-app-pvc-mysql
+  namespace: 264439-tarduch
+  uid: 024dc659-4c11-4408-bdc8-ffccbe3205e4
+  resourceVersion: '7045077590'
+  creationTimestamp: '2026-06-10T12:03:31Z'
+  annotations:
+    pv.kubernetes.io/bind-completed: 'yes'
+    pv.kubernetes.io/bound-by-controller: 'yes'
+    volume.beta.kubernetes.io/storage-provisioner: syn-rook-ceph-operator.rbd.csi.ceph.com
+    volume.kubernetes.io/selected-node: worker-c86c
+    volume.kubernetes.io/storage-provisioner: syn-rook-ceph-operator.rbd.csi.ceph.com
+  finalizers:
+    - kubernetes.io/pvc-protection
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi
+  volumeName: pvc-024dc659-4c11-4408-bdc8-ffccbe3205e4
+  storageClassName: rbd-storagepool-cluster
+  volumeMode: Filesystem
+status:
+  phase: Bound
+  accessModes:
+    - ReadWriteOnce
+  capacity:
+    storage: 1Gi

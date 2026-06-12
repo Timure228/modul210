@@ -1,3 +1,3 @@
 FROM nginxinc/nginx-unprivileged
 
-COPY index.html /usr/share/nginx/html/index.html
+COPY server.js /usr/share/nginx/html/server.js

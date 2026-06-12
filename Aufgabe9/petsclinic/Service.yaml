@@ -1,0 +1,202 @@
+kind: Service
+apiVersion: v1
+metadata:
+  name: php-my-admin
+  namespace: 264439-tarduch
+  uid: 91c63f91-dbb7-428a-9bed-be897f149bee
+  resourceVersion: '7044868237'
+  creationTimestamp: '2026-06-10T11:24:20Z'
+  labels:
+    app: php-my-admin
+    app.kubernetes.io/part-of: petclinic
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2026-06-10T11:24:20Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:app.kubernetes.io/part-of': {}
+        'f:spec':
+          'f:internalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":8080,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:selector': {}
+          'f:sessionAffinity': {}
+          'f:type': {}
+spec:
+  clusterIP: 172.30.50.141
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: http
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.50.141
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: php-my-admin
+status:
+  loadBalancer: {}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: mysql
+  namespace: 264439-tarduch
+  uid: b3291a0c-2b74-45b4-9c06-44e21596ea0a
+  resourceVersion: '7044098180'
+  creationTimestamp: '2026-06-10T08:59:47Z'
+  labels:
+    app.openshift.io/runtime: mysql-database
+    template: mysql-ephemeral-template
+    template.openshift.io/template-instance-owner: 39fc3bdd-8703-44c2-b3dc-0f283470c100
+  annotations:
+    template.openshift.io/expose-uri: 'mysql://{.spec.clusterIP}:{.spec.ports[?(.name=="mysql")].port}'
+  managedFields:
+    - manager: openshift-controller-manager
+      operation: Update
+      apiVersion: v1
+      time: '2026-06-10T08:59:47Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:template.openshift.io/expose-uri': {}
+          'f:labels':
+            .: {}
+            'f:app.openshift.io/runtime': {}
+            'f:template': {}
+            'f:template.openshift.io/template-instance-owner': {}
+        'f:spec':
+          'f:internalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":3306,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:selector': {}
+          'f:sessionAffinity': {}
+          'f:type': {}
+spec:
+  clusterIP: 172.30.161.6
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: mysql
+      protocol: TCP
+      port: 3306
+      targetPort: 3306
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.161.6
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    name: mysql
+status:
+  loadBalancer: {}
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: spring-petclinic
+  namespace: 264439-tarduch
+  uid: 12197543-f4b8-4058-8795-25262d5774b6
+  resourceVersion: '7044587361'
+  creationTimestamp: '2026-06-10T09:06:58Z'
+  labels:
+    app: spring-petclinic
+    app.kubernetes.io/component: spring-petclinic
+    app.kubernetes.io/instance: spring-petclinic
+    app.kubernetes.io/name: spring-petclinic
+    app.openshift.io/runtime: java
+    app.openshift.io/runtime-version: openjdk-17-ubi8
+  annotations:
+    app.openshift.io/vcs-ref: ''
+    app.openshift.io/vcs-uri: 'https://github.com/redhat-developer-demos/spring-petclinic'
+    openshift.io/generated-by: OpenShiftWebConsole
+  managedFields:
+    - manager: Mozilla
+      operation: Update
+      apiVersion: v1
+      time: '2026-06-10T09:06:58Z'
+      fieldsType: FieldsV1
+      fieldsV1:
+        'f:metadata':
+          'f:annotations':
+            .: {}
+            'f:app.openshift.io/vcs-ref': {}
+            'f:app.openshift.io/vcs-uri': {}
+            'f:openshift.io/generated-by': {}
+          'f:labels':
+            .: {}
+            'f:app': {}
+            'f:app.kubernetes.io/component': {}
+            'f:app.kubernetes.io/instance': {}
+            'f:app.kubernetes.io/name': {}
+            'f:app.openshift.io/runtime': {}
+            'f:app.openshift.io/runtime-version': {}
+        'f:spec':
+          'f:internalTrafficPolicy': {}
+          'f:ports':
+            .: {}
+            'k:{"port":8080,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+            'k:{"port":8443,"protocol":"TCP"}':
+              .: {}
+              'f:name': {}
+              'f:port': {}
+              'f:protocol': {}
+              'f:targetPort': {}
+          'f:selector': {}
+          'f:sessionAffinity': {}
+          'f:type': {}
+spec:
+  clusterIP: 172.30.44.205
+  ipFamilies:
+    - IPv4
+  ports:
+    - name: 8080-tcp
+      protocol: TCP
+      port: 8080
+      targetPort: 8080
+    - name: 8443-tcp
+      protocol: TCP
+      port: 8443
+      targetPort: 8443
+  internalTrafficPolicy: Cluster
+  clusterIPs:
+    - 172.30.44.205
+  type: ClusterIP
+  ipFamilyPolicy: SingleStack
+  sessionAffinity: None
+  selector:
+    app: spring-petclinic
+    deployment: spring-petclinic
+status:
+  loadBalancer: {}
